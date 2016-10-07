@@ -8,23 +8,23 @@ all: multiboot_header boot linker iso
 
 .PHONY: clean
 
-multiboot_header: multiboot_header.asm
-	$(NASM) multiboot_header.asm
+multiboot_header: src/multiboot_header.asm
+	$(NASM) -o build/multiboot_header.o src/multiboot_header.asm
 
-boot: boot.asm
-	$(NASM) boot.asm
+boot: src/boot.asm
+	$(NASM) -o build/boot.o src/boot.asm
 
-linker: multiboot_header boot linker.ld
-	ld --nmagic --output=kernel.bin --script=linker.ld multiboot_header.o boot.o
+linker: multiboot_header boot src/linker.ld
+	ld --nmagic --output=build/kernel.bin --script=src/linker.ld build/multiboot_header.o build/boot.o
 
 iso: linker
 	mkdir -p isofiles/boot/grub
 	cp grub.cfg isofiles/boot/grub
-	cp kernel.bin isofiles/boot
-	grub-mkrescue -o os.iso isofiles
+	cp build/kernel.bin isofiles/boot
+	grub-mkrescue -o build/os.iso isofiles
 
 run: iso
-	qemu-system-x86_64 -cdrom os.iso
+	qemu-system-x86_64 -cdrom build/os.iso
 
 
 clean:
