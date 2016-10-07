@@ -3,3 +3,7 @@
 
 # Executable files
 *.bin
+*.iso
+
+# Untracked folders
+isofiles/
