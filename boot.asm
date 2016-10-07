@@ -2,7 +2,7 @@
 
 global start
 
-section ;text
+section .text
 bits 32
 
 start:
