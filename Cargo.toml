@@ -3,4 +3,7 @@ name = "rust-kernel"
 version = "0.1.0"
 authors = ["Jean-Serge Monbailly <j.monbailly@orange.fr>"]
 
+[lib]
+crate-type = ["staticlib"]
+
 [dependencies]
