@@ -2,6 +2,8 @@
 
 global start
 
+extern kmain
+
 section .text
 bits 32
 start:
@@ -60,7 +62,7 @@ start:
   mov es, ax
 
   ; jump to long mode!
-  jmp gdt64.code:long_mode_start
+  jmp gdt64.code:kmain
 
   hlt
 

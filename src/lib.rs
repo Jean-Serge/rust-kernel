@@ -7,5 +7,10 @@ extern fn eh_personality() {
 
 #[lang = "panic_fmt"]
 extern fn rust_begin_panic() -> ! {
-        loop {}
+   loop {}
+}
+
+#[no_mangle]
+pub extern fn kmain() -> ! {
+    loop { }
 }
