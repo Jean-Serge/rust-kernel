@@ -8,14 +8,14 @@ all: multiboot_header boot linker iso
 
 .PHONY: clean
 
-multiboot_header: src/multiboot_header.asm
-	$(NASM) -o build/multiboot_header.o src/multiboot_header.asm
+multiboot_header: src/asm/multiboot_header.asm
+	$(NASM) -o build/multiboot_header.o src/asm/multiboot_header.asm
 
-boot: src/boot.asm
-	$(NASM) -o build/boot.o src/boot.asm
+boot: src/asm/boot.asm
+	$(NASM) -o build/boot.o src/asm/boot.asm
 
-linker: multiboot_header boot src/linker.ld
-	ld --nmagic --output=build/kernel.bin --script=src/linker.ld build/multiboot_header.o build/boot.o
+linker: multiboot_header boot src/asm/linker.ld
+	ld --nmagic --output=build/kernel.bin --script=src/asm/linker.ld build/multiboot_header.o build/boot.o
 
 iso: linker
 	mkdir -p isofiles/boot/grub
